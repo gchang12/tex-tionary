@@ -1,0 +1,11 @@
+Download from source:
+===
+https://ctan.org/pkg/impatient?lang=en
+
+
+Open terminal in root directory and run:
+===
+chmod u+w tex-dict.sh
+cd shell-scripts
+chmod u+w *.sh
+./setup.sh
