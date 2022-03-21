@@ -12,4 +12,4 @@ cd shell-scripts
 #chmod 700 dvi-compile.sh _create-dict.sh; cd ..; ./shell-scripts/dvi-compile.sh
 
 # Unmute to compile .pdf
-chmod 700 pdf-compile.sh; cd ..; ./shell-scripts/pdf-compile.sh
+#chmod 700 pdf-compile.sh; cd ..; ./shell-scripts/pdf-compile.sh
