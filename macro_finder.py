@@ -44,8 +44,9 @@ def list_sections(filename):
                     yield new_entry
                     new_entry.clear()
 
-def list_command_names(filename,max_filename_len=16):
-    name_list=list()
+def list_command_names(filename):
+    max_filename_len=16
+    bad_chars='{','}','\\','.'
     for section in list_sections(filename):
         name=str()
         for entry in section:
@@ -72,16 +73,14 @@ def list_command_names(filename,max_filename_len=16):
                             name+='-'+entry
                 else:
                     name=filename.replace('.tex','')+sep+entry
-            name_list.append(name)
-    # To assure the user that no duplicate filenames exist
-    assert len(name_list) == len(set(name_list))
-    return name_list
+ #       for c in bad_chars:
+#            name=name.replace(c,'')
+        yield name
 
 def write_command_entry(filename):
-    section_list=tuple(list_sections(filename))
     name_list=list_command_names(filename)
     preamble='\\input macros','','\\begindescriptions',''
-    for name,section in zip(name_list,section_list):
+    for name,section in zip(name_list,list_sections(filename)):
         folder=name.split(sep)[0]
         folder=input_dir+sep+folder
         if not exists(folder):
@@ -89,7 +88,6 @@ def write_command_entry(filename):
         if not name:
             continue
         filename=sep.join([input_dir,name+'.tex'])
-        if exists(filename): print(filename); raise Exception
         with open(filename,'w') as wfile:
             for p in preamble:
                 wfile.write(p+'\n')
