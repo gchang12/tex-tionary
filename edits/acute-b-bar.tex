@@ -1,0 +1,56 @@
+\input macros
+
+\begindescriptions
+
+\begindesc
+\xrdef{mathaccent}
+^^{accents}
+^^{math//accents}
+%
+\easy\ctsx acute {^{acute accent} as in $\acute x$}
+\ctsx b {^{bar-under accent} as in $\b x$}
+\ctsx bar {^{bar accent} as in $\bar x$}
+\ctsx breve {^{breve accent} as in $\breve x$}
+\ctsx check {^{check accent} as in $\check x$}
+\ctsx ddot {^{double dot accent} as in $\ddot x$}
+\ctsx dot {^{dot accent} as in $\dot x$}
+\ctsx grave {^{grave accent} as in $\grave x$}
+\ctsx hat {^{hat accent} as in $\hat x$}
+\ctsx widehat {^{wide hat accent} as in $\widehat {x+y}$}
+\ctsx tilde {^{tilde accent} as in $\tilde x$}
+\ctsx widetilde {^{wide tilde accent} as in $\widetilde {z+a}$}
+\ctsx vec {^{vector accent} as in $\vec x$}
+\explain
+These commands produce accent marks in math formulas.  You'll ordinarily
+need to leave a space after any one of them.
+A wide accent can be applied to a multicharacter subformula;
+\TeX\ will center the accent over the subformula.
+The other accents are usefully applied only to a single character.
+
+\example
+$\dot t^n \qquad \widetilde{v_1 + v_2}$
+|
+\produces
+$\dot t^n \qquad \widetilde{v_1 + v_2}$
+\endexample
+
+\begindesc
+\cts mathaccent {\<mathcode>}
+\explain
+This command tells \TeX\ to typeset a math accent
+whose family and character code are given by \<mathcode>.  (\TeX\ ignores
+the class of the \minref{mathcode}.)
+See \knuth{Appendix~G} for the details of how \TeX\ positions such an accent.
+The usual way to use |\mathaccent| is to put it in a macro definition
+that gives a name to a math accent.
+\example
+\def\acute{\mathaccent "7013}
+|
+\endexample
+\enddesc
+
+\see ``Accents'' (\xref {accents}).
+\enddesc
+
+\enddescriptions
+\end

@@ -1,0 +1,72 @@
+\input macros
+
+\begindescriptions
+{\def\test{{\bt \\if}$\Omega$}%
+\begindesc
+\bix^^{repeated actions}
+\bix^^{loops}
+\cts loop {$\alpha$ {\test} $\beta$ {\bt \\repeat}}
+\ctspecial repeat {}\ctsxrdef{@repeat}
+\explain
+These commands provide a looping construct for \TeX.
+Here $\alpha$ and $\beta$ are arbitrary sequences of commands
+and \test\ is any of the conditional tests described in
+\headcit{Conditional tests}{conds}.
+The |\repeat| replaces the |\fi| corresponding to the test,
+so you must not write an explicit |\fi| to terminate the test.
+Nor, unfortunately, can you associate an |\else| with the test.
+If you want to use the test in the opposite sense, you need to
+rearrange the test or
+define an auxiliary test with |\newif| (see above) and use that
+test in the sense you want (see the second example below).
+
+\TeX\ expands |\loop| as follows:
+\olist
+\li $\alpha$ is expanded.
+\li {\test} is performed.  If the result is false, the loop is terminated.
+\li $\beta$ is expanded.
+\li The cycle is repeated.
+\endolist
+\example
+\count255 = 6
+\loop
+\number\count255\
+\ifnum\count255 > 0
+\advance\count255 by -1
+\repeat
+|
+\produces
+\count255 = 6
+\loop
+\number\count255\
+\ifnum\count255 > 0
+\advance\count255 by -1
+\repeat
+\nextexample
+\newif\ifnotdone % \newif uses \count255 in its definition
+\count255=6
+\loop
+\number\count255\
+\ifnum\count255 < 1 \notdonefalse\else\notdonetrue\fi
+\ifnotdone
+\advance\count255 by -1
+\repeat
+|
+\produces
+\newif\ifnotdone
+\count255=6
+\loop
+\number\count255\
+\ifnum\count255 < 1 \notdonefalse\else\notdonetrue\fi
+\ifnotdone
+\advance\count255 by -1
+\repeat
+%
+\eix^^{repeated actions}
+\eix^^{loops}
+%
+\endexample
+\enddesc
+}
+\enddescriptions
+\end
