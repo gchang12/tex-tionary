@@ -57,9 +57,10 @@ def list_command_names(filename):
                 else:
                     continue
             else:
-                if '@' in entry:
+                entry=entry.split(' ')
+                if len(entry) < 2:
                     continue
-                entry=entry.split(' ')[1]
+                entry=entry[1]
                 entry=re.sub(r'\W','',entry)
                 if name:
                     if name in entry:
@@ -71,10 +72,10 @@ def list_command_names(filename):
                             break
                         else:
                             name+='-'+entry
+                elif not entry:
+                    continue
                 else:
                     name=filename.replace('.tex','')+sep+entry
- #       for c in bad_chars:
-#            name=name.replace(c,'')
         yield name
 
 def write_command_entry(filename):
