@@ -36,11 +36,11 @@ def list_sections(filename):
     with open(sep.join(['impatient',filename])) as rfile:
         for line in rfile.readlines():
             line=line.strip()
-            if not new_entry and line != '\\begindesc':
+            if not new_entry and '\\begindesc' not in line:
                 continue
             else:
                 new_entry.append(line)
-                if line == '\\enddesc':
+                if '\\enddesc' in line:
                     yield new_entry
                     new_entry.clear()
 
@@ -89,6 +89,9 @@ def write_command_entry(filename):
         if not name:
             continue
         filename=sep.join([input_dir,name+'.tex'])
+        if exists(filename):
+            continue
+        print(filename)
         with open(filename,'w') as wfile:
             for p in preamble:
                 wfile.write(p+'\n')
